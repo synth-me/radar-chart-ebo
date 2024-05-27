@@ -22,10 +22,9 @@ Alguns exemplos de utilização deste gráfico incluem:
 
 ---------------------------------
 
-### ==Avisos== 
-
-1. ==O código disponilizado funciona corretamente apenas nas versões 5 ou posteriores devido a introdução da *feature* de backsticks para formatação de *strings* que não está presente nas anteriores== 
-2. ==As partes do código colocadas aqui não são a totalidade do código e certos aspectos foram omitidos pela trivialidade do mesmo. Os trechos utilizados são apenas os mais importantes para a compreensão da matemática envolvida.== 
+## ⚠️ Avisos ⚠️
+1. O código disponilizado funciona corretamente apenas nas versões 5 ou posteriores devido a introdução da *feature* de backsticks para formatação de *strings* que não está presente nas anteriores
+2. As partes do código colocadas aqui não são a totalidade do código e certos aspectos foram omitidos pela trivialidade do mesmo. Os trechos utilizados são apenas os mais importantes para a compreensão da matemática envolvida.
 
 ------------------------------
 
@@ -33,7 +32,7 @@ Alguns exemplos de utilização deste gráfico incluem:
 
 A principio, deve se pensar: como definir um polígono de lados N ? Para isso é necessário
 definir qual será o espaço possível para desenhar este polígono.
-Uma possibilidade é estabelecer um quadrado 45 vértices, criando um ponto inicial
+Uma possibilidade é estabelecer um quadrado, criando um ponto inicial
 comum entre todos os polígonos possíveis.
 
 ![image](https://github.com/synth-me/radar-chart-ebo/assets/68300901/16a811a7-bf9d-4eeb-9301-2179ba001af0)
