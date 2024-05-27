@@ -1,0 +1,2049 @@
+<Tgml ComponentCounter="15" GridSize="20" Height="600"
+    UseGlobalScripts="True" Width="1500">
+    <Script Name="convergintFramework" OnDocumentLoad="onLoad"><![CDATA[function onLoad(evt){
+            
+    print = function (x){ 
+        console.log(x) 
+    }; 
+    
+    filterNode = (element,f) => {
+        const childBlocks = element.getChildNodes(); 
+        const items = [];
+        for(var i=0;i<childBlocks.getLength(); i++){
+            var item_ = childBlocks.item(i);
+            if(f(item_)){
+                items.push(item_);            
+            };
+        }
+        return items; 
+    }
+    
+    mapNode = (element,f) => {
+        if(Array.isArray(element)){
+            return element.map(f); 
+        }else{
+             const childBlocks = element.getChildNodes(); 
+             const items = [];
+             for(var i=0;i<childBlocks.getLength(); i++){
+                items.push(
+                    f(childBlocks.item(i))
+                )
+            }
+            return items; 
+        }
+    }
+    
+    stateful_animation = function (state,animate1,animate2){
+
+        animate1 = new P_(animate1)
+        animate2 = new P_(animate2)
+
+        if(state){
+            x = animate1;
+            y = animate2;
+        }else{
+            x = animate2;
+            y = animate1;
+        }
+        x.start();
+        y.stop();
+    }
+    
+    P_ = function(element){
+       this.element = element;
+           
+       const update = function (element,main_){
+           var l = element.getAttributes() ; 
+           var attributes_ = {}; 
+           for (var i = 0; i < l.length; i++) {
+             var attributeName = l.item(i).name;
+             var attributeValue = l.item(i).value;
+             main_[attributeName] = attributeValue ; 
+           }
+       }
+           
+       this.appendChild = function (nodeChild) {
+           this.element.appendChild(nodeChild);
+           update(this.element,this);
+           return this;
+       };
+
+       this.getAttribute = function (attribute) {
+           update(this.element,this);
+           return this.element.getAttribute(attribute);
+       };
+
+       this.getChildNodes = function () {
+           update(this.element,this);
+           return this.element.getChildNodes();
+       };
+
+       this.getElementsByTagName = function (tagName) {
+           update(this.element,this);
+           return this.element.getElementsByTagName(tagName);
+       };
+
+       this.getFirstChild = function () {
+           update(this.element,this);
+           return this.element.firstChild;
+       };
+
+       this.getLastChild = function () {
+           update(this.element,this);
+           return this.element.getLastChild();
+       };
+
+       this.getNextSibling = function () {
+           update(this.element,this);
+           return this.element.getNextSibling();
+       };
+
+       this.getOwnerDocument = function () {
+           update(this.element,this);
+           return this.element.getOwnerDocument();
+       };
+
+       this.getParentNode = function () {
+           update(this.element,this);
+           return this.element.getParentNode();
+       };
+
+       this.getPreviousSibling = function () {
+           update(this.element,this);
+           return this.element.getPreviousSibling();
+       };
+
+       this.getTagName = function () {
+           update(this.element,this);
+           return this.element.getTagName();
+       };
+
+       this.hasAttribute = function (attribute) {
+           update(this.element,this);
+           return this.element.hasAttribute(attribute);
+       };
+
+       this.hasChildNodes = function () {
+           update(this.element,this);
+           return this.element.hasChildNodes();
+       };
+
+       this.insertBefore = function (nodeChild, nodeTarget) {
+           this.element.insertBefore(nodeChild, nodeTarget);
+           update(this.element,this);
+           return this;
+       };
+
+       this.isSameNode = function (nodeName) {
+           update(this.element,this);
+           return this.element.isSameNode(nodeName);
+       };
+
+       this.removeAttribute = function (attribute) {
+           this.element.removeAttribute(attribute);
+           update(this.element,this);
+           return this;
+       };
+
+       this.removeChild = function (nodeChild) {
+           this.element.removeChild(nodeChild);
+           update(this.element,this);
+           return this;
+       };
+
+       this.replaceChild = function (nodeChild, nodeTarget) {
+           this.element.replaceChild(nodeChild, nodeTarget);
+           update(this.element,this);
+           return this;
+       };
+       
+       /* ------------------------------------------ */
+
+       this.setAttribute = function (attribute, value) {
+           this.element.setAttribute(attribute, value);
+           update(this.element,this);
+           return this;
+       };
+       
+       this.setAttributeFromObject = function (object) {
+           for(let attribute in object){
+               var value = object[attribute];
+               this.element.setAttribute(attribute.toString(),value);  
+           };         
+           update(this.element,this);
+           return this ; 
+       };
+       
+          
+      this.start = function (){
+        if(""+this.element.getTagName() === 'Animate'){
+            this.element.setAttribute("Animation","Start")
+        }
+      }
+      
+      this.stop = function (){
+        if(""+this.element.getTagName() === 'Animate'){
+            this.element.setAttribute("Animation","Stop")
+        }
+      }
+       
+       /* ------------------------------------------ */
+
+       this.createElement = function (element) {
+           update(this.element,this);
+           return new CustomElement(this.element.createElement(element));
+       };
+
+       this.getDocumentElement = function () {
+           update(this.element,this);
+           return this.element.documentElement;
+       };
+
+       this.getElementById = function (id) {
+           update(this.element,this);
+           return this.element.getElementById(id);
+       };
+
+       this.getLength = function () {
+           update(this.element,this);
+           return this.element.length;
+       };
+
+       this.item = function (index) {
+           update(this.element,this);
+           return this.element.item(index);
+       };
+       
+       
+             
+   }
+   
+}]]></Script>
+    <Component Clip="False" ContentHeight="140.0" ContentWidth="140.0"
+        Height="192.70124149711307" Left="302.98902741816676"
+        Name="radar-chart-v2" Top="41.71671869226873"
+        Visibility="Visible" Width="193.14624918679863">
+        <Ellipse Fill="#00FFFF" Height="7.20965576171875" Left="70.0"
+            Name="center" Opacity="1.0" Stroke="None"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036805776473" Visibility="Hidden" Width="7.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="1" Opacity="0.8" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.30036424306746" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="2" Opacity="0.8" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.30036424306746" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.21532957571969" Name="3" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.3180491795909" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.12518064993844" Name="4" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.03013108877059" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.23296873587594" Name="5" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="59.939998626708984" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="70.23296873587594" Name="6" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="69.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="80.23296873587594" Name="7" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="79.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="90.23296873587594" Name="8" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="89.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="100.23296873587594" Name="9" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="99.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="110.23296873587594" Name="10" Opacity="0.8"
+            Stroke="#FFFFFF" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="109.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Line Name="line-1" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-2" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-3" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-4" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-5" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-6" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-7" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-8" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-9" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-10" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-1" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-2" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.2153295757197" Name="point-test-3" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.3180491795909" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.12518064993844" Name="point-test-4" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.03013108877059" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.23296873587594" Name="point-test-5" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="69.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="80.23296873587594" Name="point-test-6" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="79.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="90.23296873587594" Name="point-test-7" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="89.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="100.23296873587594" Name="point-test-8" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="99.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="110.23296873587594" Name="point-test-9" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="109.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="120.23296873587594" Name="point-test-10" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="119.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Line Name="line-1-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-2-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-3-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-4-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-5-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-6-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-7-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-8-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-9-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="180.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-10-edge" Opacity="0.8" Stroke="#C0C0C0"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="40.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="0" Y2="0"/>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0"
+            Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0" Y1="0" Y2="0"/>
+        <Component Height="1.0" Left="0.0" Name="binds" Top="0.0" Width="1.0">
+            <Bind Name="info_1"/>
+            <Bind Name="info_2"/>
+            <Bind Name="info_3"/>
+            <Bind Name="info_4"/>
+            <Bind Name="info_5"/>
+            <Bind Name="info_6"/>
+            <Bind Name="info_7"/>
+            <Bind Name="info_8"/>
+            <Bind Name="info_9"/>
+            <Bind Name="info_10"/>
+        </Component>
+        <Metadata Name="n_sides" Value="6">
+            <Expose ExposedAttribute="Value" Name="número de informações"/>
+        </Metadata>
+        <Polygon Fill="#FFC080" Name="viz-polygon" Opacity="0.5"
+            Points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0"
+            Stroke="#C04000" StrokeDashArray="0.0" StrokeWidth="1">
+            <Expose ExposedAttribute="Stroke" Name="cor-borda"/>
+            <Expose ExposedAttribute="Fill" Name="cor-interna"/>
+            <Script OnDocumentLoad="onLoad" OnMouseOut="onOut" OnMouseOver="onOver"><![CDATA[var x  = 0;
+var increment = 0.1;
+var percentage_ ; 
+
+function transformedSine(x) {
+    return (1 + Math.sin(x)) / 2;
+}
+
+function updateValue(evt) {
+    const value = transformedSine(x);
+    console.log(`x: ${x.toFixed(2)}, transformedSine(x): ${value.toFixed(2)}`);
+    
+    evt
+       .getTarget()
+       .setAttribute("Opacity",value)
+
+    x += increment; 
+    
+    if (value >= 1 || value <= 0.4) {
+        increment = -increment;
+    }
+    
+}
+
+var original_opacity ;
+
+function onLoad(evt){    
+    
+        
+    original_opacity = evt
+                         .getTarget()
+                         .getAttribute("Opacity")
+                         
+    percentage_  = parseFloat(evt
+                         .getTarget()
+                         .getChild("percentage_on_over")
+                         .getAttribute("Value"));
+}
+
+function onOver(evt){
+    
+    evt
+      .getTarget()
+      .setAttribute("Opacity",percentage_)
+
+}
+
+function onOut(evt){
+
+    evt
+      .getTarget()
+      .setAttribute("Opacity",original_opacity)
+
+}]]></Script>
+            <Metadata Name="percentage_on_over" Value="0.8">
+                <Expose ExposedAttribute="Value" Name="% opacidade onover"/>
+            </Metadata>
+        </Polygon>
+        <Script OnDocumentLoad="onLoad" OnSignalChange="onChange"><![CDATA[const calc_length = (x1, y1, x2, y2) => {
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    return originalLength 
+}
+
+const findNewEndpoint = (x1, y1, x2, y2,newLength) => {
+        
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    const unitX = deltaX / originalLength;
+    const unitY = deltaY / originalLength;
+    
+    const newX = x1 + unitX * newLength;
+    const newY = y1 + unitY * newLength;
+    
+    return [ newX, newY ];
+}
+
+const percentage_calc = (length,pos,percentage) => {
+    return (percentage/100)*length ; 
+}
+
+const parse_name = (name) => {
+    return name.split("_")[1]
+}
+
+const viz_elipse = (container_nodes,n_sides) => {     
+    mapNode(container_nodes,(node) => {
+        if(parseInt(node.getAttribute("Name")) <= n_sides){
+            node.setAttribute("Visibility","Visible")
+        }
+    })   
+}; 
+
+const euclideanDistance = (point1,point2) => {
+    return Math.sqrt(
+        point1
+            .map((value, index) => Math.pow(value - point2[index], 2))
+            .reduce((acc, curr) => acc + curr, 0)
+    );
+}
+
+const generate_polygon = (square_vertices,n_sides) => {
+    
+    const [[x1,y1],[x2,y2],[x3,y3],[x4,y4]] = square_vertices; 
+     
+    const center_x = (square_vertices.map((value) => {
+        return value[0]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const center_y = (square_vertices.map((value) => {
+        return value[1]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const side_length = euclideanDistance([x1,y1],[x2,y2]);
+    
+    const radius = side_length/2 ; 
+    
+    var vertices = [] 
+    const angle_step = (2 * Math.PI) / n_sides ; 
+    
+    for(var i = 0; i <= n_sides ; i++){
+        var angle = i * angle_step ; 
+        var vertex_x = center_x + radius * Math.cos(angle)
+        var vertex_y = center_y + radius * Math.sin(angle)
+        
+        vertices.push([vertex_x,vertex_y])
+    }
+
+    return [vertices,[center_x,center_y]]
+}
+
+var point_container    = {}; 
+var vertices_container = []; 
+
+function onLoad(event){
+
+    const rect_points = new P_(event.getCurrentTarget());
+    const center = event
+                        .getCurrentTarget()
+                        .getChild("center");                        
+                        
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    
+    
+    const lines = filterNode(rect_points,(x) => {
+        return (""+x.getAttribute("Name") === "")
+    })
+    const points = mapNode(lines,(x) => {
+        return [parseFloat(x.getAttribute("X1")),parseFloat(x.getAttribute("Y1"))]
+    })
+    
+    const information = generate_polygon(points,n_sides);
+    
+    const vertices = information[0];
+    const [center_x,center_y] = information[1];
+    
+    center.setAttribute("Left",center_x);
+    center.setAttribute("Bottom",center_y);
+    
+    viz_elipse(event.getCurrentTarget(),n_sides)
+    vertices.map((vertice,index) => {
+        if(index > 0){
+            var p = event.getCurrentTarget().getChild(`${index}`);
+            p.setAttribute("Left",vertice[0]);
+            p.setAttribute("Top",vertice[1]);
+        }
+    })
+    
+    vertices_container = information ; 
+    
+}
+
+function onChange(event){
+    
+    const bind_name = ""+event
+                        .getTarget()
+                        .getFullBindName(); 
+
+    //console.log(bind_name)
+                        
+    const parsed = parse_name(bind_name)
+                                                    
+    const value = parseFloat(event.getValue()); 
+                                                                                         
+    const viz_polygon = event
+                        .getCurrentTarget()
+                        .getChild("viz-polygon");
+    
+    const point_test = event
+                        .getCurrentTarget()
+                        .getChild("point-test-"+parsed);     
+    
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    const template_line = event
+                            .getCurrentTarget()
+                            .getChild(`line-${parsed}`);
+
+    if(n_sides >= parseInt(parsed)){        
+        if(parseInt(parsed) === 1){    
+            for(var x = 1; x <= n_sides; x++){                              
+                var point_test_temp = event
+                                        .getCurrentTarget()
+                                        .getChild("point-test-"+x); 
+                var point_left_v = parseFloat(point_test_temp.getAttribute("Left"))
+                var point_top_v = parseFloat(point_test_temp.getAttribute("Top"))
+                point_container[x] = {
+                    "Left":point_left_v,
+                    "Top":point_top_v
+                }
+            }       
+        }
+        
+        
+        const [vertices,[center_x,center_y]] = vertices_container ; 
+        
+        // console.log(JSON.stringify(vertices))
+        
+        var edges = []
+        for (let i = 0; i < vertices.length; i++) {
+            var startPoint = vertices[i];
+            var endPoint = vertices[(i + 1) % vertices.length]; // Wrap around to the first point
+            edges.push([startPoint, endPoint]);
+            
+            new P_(event
+                    .getCurrentTarget()                    
+                    .getChild(`line-${i+1}-edge`))
+                    .setAttribute("X1",startPoint[0])
+                    .setAttribute("Y1",startPoint[1])
+                    .setAttribute("X2",endPoint[0])
+                    .setAttribute("Y2",endPoint[1])
+                    .setAttribute("Visibility","Visible")
+            
+        }
+        
+        
+        const find_vert = ((vertices) => {
+            return vertices[parseInt(parsed) - 1]; 
+        })(vertices); 
+        
+        
+        var values_ = {"X1":center_x,"Y1":center_y,"X2":find_vert[0],"Y2":find_vert[1]};
+        
+        
+        new P_(template_line)
+                    .setAttribute("X1",find_vert[0])
+                    .setAttribute("Y1",find_vert[1])
+                    .setAttribute("X2",center_x)
+                    .setAttribute("Y2",center_y)
+                    .setAttribute("Visibility","Visible");
+        
+        const length_ = calc_length(values_.X1,values_.Y1,values_.X2,values_.Y2);
+        
+        const new_length = percentage_calc(length_,parsed,value);
+        const [X2_new,Y2_new] = findNewEndpoint(values_.X1,values_.Y1,values_.X2,values_.Y2,new_length);
+        
+        var current_v = ((name) => {
+            return parseInt(name.split("_")[1])
+        })(bind_name); 
+        
+        const points = viz_polygon.getAttribute("Points"); 
+        const pointsArray = points.split(" "); 
+        const new_points = pointsArray.map((value,index) => {
+            if(index === current_v - 1){
+                return `${X2_new},${Y2_new}`
+            }else{
+                return value 
+            }; 
+        });
+        
+        
+        const probe = event
+                        .getCurrentTarget()
+                        .getChild(`${parsed}`); 
+        
+        const current_left_probe = parseFloat(probe.getAttribute("Left"))
+        const current_top_probe  = parseFloat(probe.getAttribute("Top"))
+        
+        var select = parseInt(parsed)
+                
+        const delta_left = current_left_probe - point_container[select]["Left"]
+        const delta_top = current_top_probe - point_container[select]["Top"]
+        
+        point_test.setAttribute("Left",point_container[select]["Left"]+(value/100)*delta_left);
+        point_test.setAttribute("Top",point_container[select]["Top"]+(value/100)*delta_top); 
+        
+        
+        
+        new_points.map((element) => {
+            //console.log(element)
+        })
+        
+        
+        
+        //console.log(n_sides)
+        
+        //console.log(JSON.stringify(new_points))
+        
+        if(new_points.length > n_sides){
+            while(new_points.length > n_sides){
+                new_points.pop()
+            }
+        }
+        
+        //console.log(JSON.stringify(new_points))
+        
+        //console.log(new_points.length)
+        
+        viz_polygon.setAttribute("Points",new_points.join(" "));
+        
+         
+    }
+
+}
+
+// EOF ]]></Script>
+    </Component>
+    <Rectangle Fill="#000000" Height="264.0" Left="229.58409787217533"
+        Opacity="1.0" RadiusX="0.0" RadiusY="0.0" Stroke="#000000"
+        StrokeDashArray="0.0" StrokeWidth="1.0" Top="285.0192565917969" Width="332.8908635177188"/>
+    <Component Clip="False" ContentHeight="140.0" ContentWidth="140.0"
+        Height="192.70124149711307" Left="306.85694734004176"
+        Name="radar-chart-dark-blue" Top="327.4167156405109"
+        Visibility="Visible" Width="193.14624918679863">
+        <Ellipse Fill="#00FFFF" Height="7.20965576171875" Left="70.0"
+            Name="center" Opacity="1.0" Stroke="None"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036805776473" Visibility="Hidden" Width="7.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="1" Opacity="0" Stroke="#000000" StrokeDashArray="0.0"
+            StrokeWidth="0.2" Top="60.30036424306746"
+            Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="2" Opacity="0" Stroke="#000000" StrokeDashArray="0.0"
+            StrokeWidth="0.2" Top="60.30036424306746"
+            Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.21532957571969" Name="3" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.3180491795909" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.12518064993844" Name="4" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.03013108877059" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.23296873587594" Name="5" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="59.939998626708984" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="70.23296873587594" Name="6" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="69.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="80.23296873587594" Name="7" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="79.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="90.23296873587594" Name="8" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="89.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="100.23296873587594" Name="9" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="99.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="110.23296873587594" Name="10" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="109.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Line Name="line-1" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-2" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-3" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-4" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-5" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-6" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-7" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-8" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-9" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-10" Opacity="0.5" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-1" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-2" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.2153295757197" Name="point-test-3" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.3180491795909" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.12518064993844" Name="point-test-4" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.03013108877059" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.23296873587594" Name="point-test-5" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="69.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="80.23296873587594" Name="point-test-6" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="79.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="90.23296873587594" Name="point-test-7" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="89.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="100.23296873587594" Name="point-test-8" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="99.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="110.23296873587594" Name="point-test-9" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="109.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="120.23296873587594" Name="point-test-10" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="119.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Line Name="line-1-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-2-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-3-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-4-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-5-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-6-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-7-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-8-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-9-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="180.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-10-edge" Opacity="0.5" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="40.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="0" Y2="0"/>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0"
+            Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0" Y1="0" Y2="0"/>
+        <Component Height="1.0" Left="0.0" Name="binds" Top="0.0" Width="1.0">
+            <Bind Name="info_1"/>
+            <Bind Name="info_2"/>
+            <Bind Name="info_3"/>
+            <Bind Name="info_4"/>
+            <Bind Name="info_5"/>
+            <Bind Name="info_6"/>
+            <Bind Name="info_7"/>
+            <Bind Name="info_8"/>
+            <Bind Name="info_9"/>
+            <Bind Name="info_10"/>
+        </Component>
+        <Metadata Name="n_sides" Value="6">
+            <Expose ExposedAttribute="Value" Name="número de informações"/>
+        </Metadata>
+        <Polygon Fill="#00FFFF" Name="viz-polygon" Opacity="0.5"
+            Points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0"
+            Stroke="#0000FF" StrokeDashArray="0.0" StrokeWidth="1">
+            <Expose ExposedAttribute="Stroke" Name="cor-borda"/>
+            <Expose ExposedAttribute="Fill" Name="cor-interna"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-poligono"/>
+            <Metadata Name="percentage_on_over" Value="0.4">
+                <Expose ExposedAttribute="Value" Name="% opacidade onover"/>
+            </Metadata>
+            <Script OnDocumentLoad="onLoad" OnMouseOut="onOut" OnMouseOver="onOver"><![CDATA[var x  = 0;
+var increment = 0.1;
+var percentage_ ; 
+
+function transformedSine(x) {
+    return (1 + Math.sin(x)) / 2;
+}
+
+function updateValue(evt) {
+    const value = transformedSine(x);
+    console.log(`x: ${x.toFixed(2)}, transformedSine(x): ${value.toFixed(2)}`);
+    
+    evt
+       .getTarget()
+       .setAttribute("Opacity",value)
+
+    x += increment; 
+    
+    if (value >= 1 || value <= 0.4) {
+        increment = -increment;
+    }
+    
+}
+
+var original_opacity ;
+
+function onLoad(evt){    
+    
+        
+    original_opacity = evt
+                         .getTarget()
+                         .getAttribute("Opacity")
+                         
+    percentage_  = parseFloat(evt
+                         .getTarget()
+                         .getChild("percentage_on_over")
+                         .getAttribute("Value"));
+}
+
+function onOver(evt){
+    
+    evt
+      .getTarget()
+      .setAttribute("Opacity",percentage_)
+
+}
+
+function onOut(evt){
+
+    evt
+      .getTarget()
+      .setAttribute("Opacity",original_opacity)
+
+}]]></Script>
+        </Polygon>
+        <Script OnDocumentLoad="onLoad" OnSignalChange="onChange"><![CDATA[const calc_length = (x1, y1, x2, y2) => {
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    return originalLength 
+}
+
+const findNewEndpoint = (x1, y1, x2, y2,newLength) => {
+        
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    const unitX = deltaX / originalLength;
+    const unitY = deltaY / originalLength;
+    
+    const newX = x1 + unitX * newLength;
+    const newY = y1 + unitY * newLength;
+    
+    return [ newX, newY ];
+}
+
+const percentage_calc = (length,pos,percentage) => {
+    return (percentage/100)*length ; 
+}
+
+const parse_name = (name) => {
+    return name.split("_")[1]
+}
+
+const viz_elipse = (container_nodes,n_sides) => {     
+    mapNode(container_nodes,(node) => {
+        if(parseInt(node.getAttribute("Name")) <= n_sides){
+            node.setAttribute("Visibility","Visible")
+        }
+    })   
+}; 
+
+const euclideanDistance = (point1,point2) => {
+    return Math.sqrt(
+        point1
+            .map((value, index) => Math.pow(value - point2[index], 2))
+            .reduce((acc, curr) => acc + curr, 0)
+    );
+}
+
+const generate_polygon = (square_vertices,n_sides) => {
+    
+    // vértices do quadrado, usados para definir as próximas 
+    // medidas 
+    const [[x1,y1],[x2,y2],[x3,y3],[x4,y4]] = square_vertices; 
+    
+    // definindo o centro do quadrado para as duas 
+    // coordenadas 
+    const center_x = (square_vertices.map((value) => {
+        return value[0]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const center_y = (square_vertices.map((value) => {
+        return value[1]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const side_length = euclideanDistance([x1,y1],[x2,y2]);
+    
+    const radius = side_length/2 ; 
+    
+    var vertices = [] 
+    const angle_step = (2 * Math.PI) / n_sides ; 
+    
+    for(var i = 0; i <= n_sides ; i++){
+        var angle = i * angle_step ; 
+        var vertex_x = center_x + radius * Math.cos(angle)
+        var vertex_y = center_y + radius * Math.sin(angle)
+        
+        vertices.push([vertex_x,vertex_y])
+    }
+
+    return [vertices,[center_x,center_y]]
+}
+
+var point_container    = {}; 
+var vertices_container = []; 
+
+function onLoad(event){
+
+    const rect_points = new P_(event.getCurrentTarget());
+    const center = event
+                        .getCurrentTarget()
+                        .getChild("center");                        
+                        
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    
+    
+    const lines = filterNode(rect_points,(x) => {
+        return (""+x.getAttribute("Name") === "")
+    })
+    const points = mapNode(lines,(x) => {
+        return [parseFloat(x.getAttribute("X1")),parseFloat(x.getAttribute("Y1"))]
+    })
+    
+    const information = generate_polygon(points,n_sides);
+    
+    const vertices = information[0];
+    const [center_x,center_y] = information[1];
+    
+    center.setAttribute("Left",center_x);
+    center.setAttribute("Bottom",center_y);
+    
+    viz_elipse(event.getCurrentTarget(),n_sides)
+    vertices.map((vertice,index) => {
+        if(index > 0){
+            var p = event.getCurrentTarget().getChild(`${index}`);
+            p.setAttribute("Left",vertice[0]);
+            p.setAttribute("Top",vertice[1]);
+        }
+    })
+    
+    vertices_container = information ; 
+    
+}
+
+function onChange(event){
+    
+    const bind_name = ""+event
+                        .getTarget()
+                        .getFullBindName(); 
+
+    //console.log(bind_name)
+                        
+    const parsed = parse_name(bind_name)
+                                                    
+    const value = parseFloat(event.getValue()); 
+                                                                                         
+    const viz_polygon = event
+                        .getCurrentTarget()
+                        .getChild("viz-polygon");
+    
+    const point_test = event
+                        .getCurrentTarget()
+                        .getChild("point-test-"+parsed);     
+    
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    const template_line = event
+                            .getCurrentTarget()
+                            .getChild(`line-${parsed}`);
+
+    if(n_sides >= parseInt(parsed)){        
+        if(parseInt(parsed) === 1){    
+            for(var x = 1; x <= n_sides; x++){                              
+                var point_test_temp = event
+                                        .getCurrentTarget()
+                                        .getChild("point-test-"+x); 
+                var point_left_v = parseFloat(point_test_temp.getAttribute("Left"))
+                var point_top_v = parseFloat(point_test_temp.getAttribute("Top"))
+                point_container[x] = {
+                    "Left":point_left_v,
+                    "Top":point_top_v
+                }
+            }       
+        }
+        
+        
+        const [vertices,[center_x,center_y]] = vertices_container ; 
+        
+        // console.log(JSON.stringify(vertices))
+        
+        var edges = []
+        for (let i = 0; i < vertices.length; i++) {
+            var startPoint = vertices[i];
+            var endPoint = vertices[(i + 1) % vertices.length]; // Wrap around to the first point
+            edges.push([startPoint, endPoint]);
+            
+            new P_(event
+                    .getCurrentTarget()                    
+                    .getChild(`line-${i+1}-edge`))
+                    .setAttribute("X1",startPoint[0])
+                    .setAttribute("Y1",startPoint[1])
+                    .setAttribute("X2",endPoint[0])
+                    .setAttribute("Y2",endPoint[1])
+                    .setAttribute("Visibility","Visible")
+            
+        }
+        
+        
+        const find_vert = ((vertices) => {
+            return vertices[parseInt(parsed) - 1]; 
+        })(vertices); 
+        
+        
+        var values_ = {"X1":center_x,"Y1":center_y,"X2":find_vert[0],"Y2":find_vert[1]};
+        
+        
+        new P_(template_line)
+                    .setAttribute("X1",find_vert[0])
+                    .setAttribute("Y1",find_vert[1])
+                    .setAttribute("X2",center_x)
+                    .setAttribute("Y2",center_y)
+                    .setAttribute("Visibility","Visible");
+        
+        const length_ = calc_length(values_.X1,values_.Y1,values_.X2,values_.Y2);
+        
+        const new_length = percentage_calc(length_,parsed,value);
+        const [X2_new,Y2_new] = findNewEndpoint(values_.X1,values_.Y1,values_.X2,values_.Y2,new_length);
+        
+        var current_v = ((name) => {
+            return parseInt(name.split("_")[1])
+        })(bind_name); 
+        
+        const points = viz_polygon.getAttribute("Points"); 
+        const pointsArray = points.split(" "); 
+        const new_points = pointsArray.map((value,index) => {
+            if(index === current_v - 1){
+                return `${X2_new},${Y2_new}`
+            }else{
+                return value 
+            }; 
+        });
+        
+        
+        const probe = event
+                        .getCurrentTarget()
+                        .getChild(`${parsed}`); 
+        
+        const current_left_probe = parseFloat(probe.getAttribute("Left"))
+        const current_top_probe  = parseFloat(probe.getAttribute("Top"))
+        
+        var select = parseInt(parsed)
+                
+        const delta_left = current_left_probe - point_container[select]["Left"]
+        const delta_top = current_top_probe - point_container[select]["Top"]
+        
+        point_test.setAttribute("Left",point_container[select]["Left"]+(value/100)*delta_left);
+        point_test.setAttribute("Top",point_container[select]["Top"]+(value/100)*delta_top); 
+        
+        
+        
+        
+        new_points.map((element) => {
+            //console.log(element)
+        })
+        
+        
+        
+        //console.log(n_sides)
+        
+        //console.log(JSON.stringify(new_points))
+        
+        if(new_points.length > n_sides){
+            while(new_points.length > n_sides){
+                new_points.pop()
+            }
+        }
+        
+        //console.log(JSON.stringify(new_points))
+        
+        //console.log(new_points.length)
+        
+        viz_polygon.setAttribute("Points",new_points.join(" "));
+        
+         
+    }
+
+}
+
+// EOF ]]></Script>
+    </Component>
+    <Component Clip="False" ContentHeight="140.0" ContentWidth="140.0"
+        Height="192.70124149711307" Left="306.85694734004176"
+        Name="radar-chart-dark-yellow" Top="327.4167156405109"
+        Visibility="Visible" Width="193.14624918679863">
+        <Ellipse Fill="#00FFFF" Height="7.20965576171875" Left="70.0"
+            Name="center" Opacity="1.0" Stroke="None"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036805776473" Visibility="Hidden" Width="7.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="1" Opacity="0" Stroke="#000000" StrokeDashArray="0.0"
+            StrokeWidth="0.2" Top="60.30036424306746"
+            Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991" Left="60.0"
+            Name="2" Opacity="0" Stroke="#000000" StrokeDashArray="0.0"
+            StrokeWidth="0.2" Top="60.30036424306746"
+            Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.21532957571969" Name="3" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.3180491795909" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.12518064993844" Name="4" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="60.03013108877059" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="60.23296873587594" Name="5" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="59.939998626708984" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="70.23296873587594" Name="6" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="69.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="80.23296873587594" Name="7" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="79.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="90.23296873587594" Name="8" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="89.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="100.23296873587594" Name="9" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="99.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Ellipse Fill="#FFFFFF" Height="2.928207467200991"
+            Left="110.23296873587594" Name="10" Opacity="0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="0.2"
+            Top="109.93999862670898" Visibility="Hidden" Width="3.025665429866194">
+            <Expose ExposedAttribute="Stroke" Name="cor-vertice"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-vertice"/>
+        </Ellipse>
+        <Line Name="line-1" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-2" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="10.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-3" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="150.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-4" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="150.0" X2="10.0" Y1="10.0" Y2="10.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-5" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-6" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-7" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-8" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-9" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Line Name="line-10" Opacity="0" Stroke="#E0E0E0"
+            StrokeDashArray="0.0" StrokeWidth="1.0" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-apotema"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-apotema"/>
+        </Line>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-1" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875" Left="70.0"
+            Name="point-test-2" Opacity="1.0" Stroke="#000000"
+            StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.30036424306746" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.2153295757197" Name="point-test-3" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.3180491795909" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.12518064993844" Name="point-test-4" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="70.03013108877059" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="70.23296873587594" Name="point-test-5" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="69.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="80.23296873587594" Name="point-test-6" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="79.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="90.23296873587594" Name="point-test-7" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="89.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="100.23296873587594" Name="point-test-8" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="99.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="110.23296873587594" Name="point-test-9" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="109.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Ellipse Fill="#FFFFFF" Height="1.20965576171875"
+            Left="120.23296873587594" Name="point-test-10" Opacity="1.0"
+            Stroke="#000000" StrokeDashArray="0.0" StrokeWidth="1.0"
+            Top="119.93999862670898" Visibility="Hidden" Width="1.20965576171875"/>
+        <Line Name="line-1-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-2-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="20.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-3-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="160.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-4-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="160.0" X2="20.0" Y1="20.0" Y2="20.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-5-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-6-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="30.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-7-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="170.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-8-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="170.0" X2="30.0" Y1="30.0" Y2="30.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-9-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="180.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Name="line-10-edge" Opacity="0" Stroke="#FFFFFF"
+            StrokeDashArray="0.0" StrokeWidth="1" Visibility="Hidden"
+            X1="180.0" X2="40.0" Y1="40.0" Y2="40.0">
+            <Expose ExposedAttribute="Stroke" Name="cor-aresta"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-aresta"/>
+        </Line>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="0" Y2="0"/>
+        <Line Opacity="1.0" Stroke="#FFFFFF" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="0" X2="0" Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0"
+            Y1="140" Y2="0"/>
+        <Line Opacity="1.0" Stroke="None" StrokeDashArray="0.0"
+            StrokeWidth="1.0" Visibility="Hidden" X1="140" X2="0" Y1="0" Y2="0"/>
+        <Component Height="1.0" Left="0.0" Name="binds" Top="0.0" Width="1.0">
+            <Bind Name="info_1"/>
+            <Bind Name="info_2"/>
+            <Bind Name="info_3"/>
+            <Bind Name="info_4"/>
+            <Bind Name="info_5"/>
+            <Bind Name="info_6"/>
+            <Bind Name="info_7"/>
+            <Bind Name="info_8"/>
+            <Bind Name="info_9"/>
+            <Bind Name="info_10"/>
+        </Component>
+        <Metadata Name="n_sides" Value="6">
+            <Expose ExposedAttribute="Value" Name="número de informações"/>
+        </Metadata>
+        <Polygon Fill="#FFC080" Name="viz-polygon" Opacity="0.5"
+            Points="0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0 0.0,0.0"
+            Stroke="#C04000" StrokeDashArray="0.0" StrokeWidth="1">
+            <Expose ExposedAttribute="Stroke" Name="cor-borda"/>
+            <Expose ExposedAttribute="Fill" Name="cor-interna"/>
+            <Expose ExposedAttribute="Opacity" Name="opacidade-poligono"/>
+            <Metadata Name="percentage_on_over" Value="0.4">
+                <Expose ExposedAttribute="Value" Name="% opacidade onover"/>
+            </Metadata>
+            <Script OnDocumentLoad="onLoad" OnMouseOut="onOut" OnMouseOver="onOver"><![CDATA[var x  = 0;
+var increment = 0.1;
+var percentage_ ; 
+
+function transformedSine(x) {
+    return (1 + Math.sin(x)) / 2;
+}
+
+function updateValue(evt) {
+    const value = transformedSine(x);
+    console.log(`x: ${x.toFixed(2)}, transformedSine(x): ${value.toFixed(2)}`);
+    
+    evt
+       .getTarget()
+       .setAttribute("Opacity",value)
+
+    x += increment; 
+    
+    if (value >= 1 || value <= 0.4) {
+        increment = -increment;
+    }
+    
+}
+
+var original_opacity ;
+
+function onLoad(evt){    
+    
+        
+    original_opacity = evt
+                         .getTarget()
+                         .getAttribute("Opacity")
+                         
+    percentage_  = parseFloat(evt
+                         .getTarget()
+                         .getChild("percentage_on_over")
+                         .getAttribute("Value"));
+}
+
+function onOver(evt){
+    
+    evt
+      .getTarget()
+      .setAttribute("Opacity",percentage_)
+
+}
+
+function onOut(evt){
+
+    evt
+      .getTarget()
+      .setAttribute("Opacity",original_opacity)
+
+}]]></Script>
+        </Polygon>
+        <Script OnDocumentLoad="onLoad" OnSignalChange="onChange"><![CDATA[const calc_length = (x1, y1, x2, y2) => {
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    return originalLength 
+}
+
+const findNewEndpoint = (x1, y1, x2, y2,newLength) => {
+        
+    const deltaX = x2 - x1;
+    const deltaY = y2 - y1;
+    
+    const originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    const unitX = deltaX / originalLength;
+    const unitY = deltaY / originalLength;
+    
+    const newX = x1 + unitX * newLength;
+    const newY = y1 + unitY * newLength;
+    
+    return [ newX, newY ];
+}
+
+const percentage_calc = (length,pos,percentage) => {
+    return (percentage/100)*length ; 
+}
+
+const parse_name = (name) => {
+    return name.split("_")[1]
+}
+
+const viz_elipse = (container_nodes,n_sides) => {     
+    mapNode(container_nodes,(node) => {
+        if(parseInt(node.getAttribute("Name")) <= n_sides){
+            node.setAttribute("Visibility","Visible")
+        }
+    })   
+}; 
+
+const euclideanDistance = (point1,point2) => {
+    return Math.sqrt(
+        point1
+            .map((value, index) => Math.pow(value - point2[index], 2))
+            .reduce((acc, curr) => acc + curr, 0)
+    );
+}
+
+const generate_polygon = (square_vertices,n_sides) => {
+    
+    // vértices do quadrado, usados para definir as próximas 
+    // medidas 
+    const [[x1,y1],[x2,y2],[x3,y3],[x4,y4]] = square_vertices; 
+    
+    // definindo o centro do quadrado para as duas 
+    // coordenadas 
+    const center_x = (square_vertices.map((value) => {
+        return value[0]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const center_y = (square_vertices.map((value) => {
+        return value[1]
+    }).reduce((acc,cv) => {
+        return acc + cv}, 0))/4
+    
+    const side_length = euclideanDistance([x1,y1],[x2,y2]);
+    
+    const radius = side_length/2 ; 
+    
+    var vertices = [] 
+    const angle_step = (2 * Math.PI) / n_sides ; 
+    
+    for(var i = 0; i <= n_sides ; i++){
+        var angle = i * angle_step ; 
+        var vertex_x = center_x + radius * Math.cos(angle)
+        var vertex_y = center_y + radius * Math.sin(angle)
+        
+        vertices.push([vertex_x,vertex_y])
+    }
+
+    return [vertices,[center_x,center_y]]
+}
+
+var point_container    = {}; 
+var vertices_container = []; 
+
+function onLoad(event){
+
+    const rect_points = new P_(event.getCurrentTarget());
+    const center = event
+                        .getCurrentTarget()
+                        .getChild("center");                        
+                        
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    
+    
+    const lines = filterNode(rect_points,(x) => {
+        return (""+x.getAttribute("Name") === "")
+    })
+    const points = mapNode(lines,(x) => {
+        return [parseFloat(x.getAttribute("X1")),parseFloat(x.getAttribute("Y1"))]
+    })
+    
+    const information = generate_polygon(points,n_sides);
+    
+    const vertices = information[0];
+    const [center_x,center_y] = information[1];
+    
+    center.setAttribute("Left",center_x);
+    center.setAttribute("Bottom",center_y);
+    
+    viz_elipse(event.getCurrentTarget(),n_sides)
+    vertices.map((vertice,index) => {
+        if(index > 0){
+            var p = event.getCurrentTarget().getChild(`${index}`);
+            p.setAttribute("Left",vertice[0]);
+            p.setAttribute("Top",vertice[1]);
+        }
+    })
+    
+    vertices_container = information ; 
+    
+}
+
+function onChange(event){
+    
+    const bind_name = ""+event
+                        .getTarget()
+                        .getFullBindName(); 
+
+    //console.log(bind_name)
+                        
+    const parsed = parse_name(bind_name)
+                                                    
+    const value = parseFloat(event.getValue()); 
+                                                                                         
+    const viz_polygon = event
+                        .getCurrentTarget()
+                        .getChild("viz-polygon");
+    
+    const point_test = event
+                        .getCurrentTarget()
+                        .getChild("point-test-"+parsed);     
+    
+    const n_sides = parseInt(event
+                                .getCurrentTarget()
+                                .getChild("n_sides")
+                                .getAttribute("Value"));
+    const template_line = event
+                            .getCurrentTarget()
+                            .getChild(`line-${parsed}`);
+
+    if(n_sides >= parseInt(parsed)){        
+        if(parseInt(parsed) === 1){    
+            for(var x = 1; x <= n_sides; x++){                              
+                var point_test_temp = event
+                                        .getCurrentTarget()
+                                        .getChild("point-test-"+x); 
+                var point_left_v = parseFloat(point_test_temp.getAttribute("Left"))
+                var point_top_v = parseFloat(point_test_temp.getAttribute("Top"))
+                point_container[x] = {
+                    "Left":point_left_v,
+                    "Top":point_top_v
+                }
+            }       
+        }
+        
+        
+        const [vertices,[center_x,center_y]] = vertices_container ; 
+        
+        // console.log(JSON.stringify(vertices))
+        
+        var edges = []
+        for (let i = 0; i < vertices.length; i++) {
+            var startPoint = vertices[i];
+            var endPoint = vertices[(i + 1) % vertices.length]; // Wrap around to the first point
+            edges.push([startPoint, endPoint]);
+            
+            new P_(event
+                    .getCurrentTarget()                    
+                    .getChild(`line-${i+1}-edge`))
+                    .setAttribute("X1",startPoint[0])
+                    .setAttribute("Y1",startPoint[1])
+                    .setAttribute("X2",endPoint[0])
+                    .setAttribute("Y2",endPoint[1])
+                    .setAttribute("Visibility","Visible")
+            
+        }
+        
+        
+        const find_vert = ((vertices) => {
+            return vertices[parseInt(parsed) - 1]; 
+        })(vertices); 
+        
+        
+        var values_ = {"X1":center_x,"Y1":center_y,"X2":find_vert[0],"Y2":find_vert[1]};
+        
+        
+        new P_(template_line)
+                    .setAttribute("X1",find_vert[0])
+                    .setAttribute("Y1",find_vert[1])
+                    .setAttribute("X2",center_x)
+                    .setAttribute("Y2",center_y)
+                    .setAttribute("Visibility","Visible");
+        
+        const length_ = calc_length(values_.X1,values_.Y1,values_.X2,values_.Y2);
+        
+        const new_length = percentage_calc(length_,parsed,value);
+        const [X2_new,Y2_new] = findNewEndpoint(values_.X1,values_.Y1,values_.X2,values_.Y2,new_length);
+        
+        var current_v = ((name) => {
+            return parseInt(name.split("_")[1])
+        })(bind_name); 
+        
+        const points = viz_polygon.getAttribute("Points"); 
+        const pointsArray = points.split(" "); 
+        const new_points = pointsArray.map((value,index) => {
+            if(index === current_v - 1){
+                return `${X2_new},${Y2_new}`
+            }else{
+                return value 
+            }; 
+        });
+        
+        
+        const probe = event
+                        .getCurrentTarget()
+                        .getChild(`${parsed}`); 
+        
+        const current_left_probe = parseFloat(probe.getAttribute("Left"))
+        const current_top_probe  = parseFloat(probe.getAttribute("Top"))
+        
+        var select = parseInt(parsed)
+                
+        const delta_left = current_left_probe - point_container[select]["Left"]
+        const delta_top = current_top_probe - point_container[select]["Top"]
+        
+        point_test.setAttribute("Left",point_container[select]["Left"]+(value/100)*delta_left);
+        point_test.setAttribute("Top",point_container[select]["Top"]+(value/100)*delta_top); 
+        
+        
+        
+        
+        new_points.map((element) => {
+            //console.log(element)
+        })
+        
+        
+        
+        //console.log(n_sides)
+        
+        //console.log(JSON.stringify(new_points))
+        
+        if(new_points.length > n_sides){
+            while(new_points.length > n_sides){
+                new_points.pop()
+            }
+        }
+        
+        //console.log(JSON.stringify(new_points))
+        
+        //console.log(new_points.length)
+        
+        viz_polygon.setAttribute("Points",new_points.join(" "));
+        
+         
+    }
+
+}
+
+// EOF ]]></Script>
+    </Component>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="312.3316345214844" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="35.4012565612793" VerticalAlign="Top"><![CDATA[info A]]></Text>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="259.44873046875" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="127.41053771972656" VerticalAlign="Top"><![CDATA[info B]]></Text>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="316.6697692871094" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="221.56582641601562" VerticalAlign="Top"><![CDATA[info C]]></Text>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="440.0487365722656" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="221.5657501220703" VerticalAlign="Top"><![CDATA[info D]]></Text>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="498.81982421875" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="127.41049194335938" VerticalAlign="Top"><![CDATA[info E]]></Text>
+    <Text FontFamily="Arial" FontSize="15.0" FontStyle="Normal"
+        FontWeight="Normal" HorizontalAlign="Left"
+        Left="440.0486755371094" Opacity="1.0" Stroke="#000000"
+        TextDecoration="None" Top="35.40132522583008" VerticalAlign="Top"><![CDATA[info F]]></Text>
+</Tgml>

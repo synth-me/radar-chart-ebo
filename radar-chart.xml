@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" SemanticsFilter="Special" Version="5.0.3.117">
+  <MetaInformation>
+    <ExportMode Value="Special"/>
+    <SemanticsFilter Value="None"/>
+    <RuntimeVersion Value="5.0.3.117"/>
+    <SourceVersion Value="5.0.3.117"/>
+    <ServerFullPath Value="/Server 1"/>
+  </MetaInformation>
+  <Types>
+    <ObjectType Name            = "udt.43qjkze7ienu5clzpdyi2k4mha.kzpiatx7nbgpzlc67bhcvwriq2fbcykh"
+                DisplayName     = ""
+                Description     = ""
+                Base            = "tgml.TGML"
+                Icon            = ""
+                Abstract        = "0"
+                Implements      = ""
+                DefaultProperty = ""
+                Version         = "1"
+                >
+      <PropertyTab Name = "BASIC">
+        <PropertyGroup Name = "ConfigurationSettings">
+          <Parameter Name                  = "FILE"
+                     DisplayName           = "File"
+                     Description           = ""
+                     Visibility            = "Normal"
+                     Optional              = "0"
+                     ReadOnly              = "0"
+                     Static                = "1"
+                     RTWriteable           = "0"
+                     Unique                = "No"
+                     Copy                  = "0"
+                     Nullable              = "0"
+                     >
+              <Type Configurable = "No" Value = "tgml.TGMLFile"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitValue Null="0">
+              <FileContents Size="8372"><![CDATA[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]]>
+              </FileContents>
+            </InitValue>
+          </Parameter>
+        </PropertyGroup>
+      </PropertyTab>
+      <PropertyTab Name = "Bindings">
+        <PropertyGroup Name = "Bindings">
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_9"
+                             DisplayName           = "radar-chart-v2.binds.info_9"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_5"
+                             DisplayName           = "radar-chart-v2.binds.info_5"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_10"
+                             DisplayName           = "radar-chart-v2.binds.info_10"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_2"
+                             DisplayName           = "radar-chart-v2.binds.info_2"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_8"
+                             DisplayName           = "radar-chart-v2.binds.info_8"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_3"
+                             DisplayName           = "radar-chart-v2.binds.info_3"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_4"
+                             DisplayName           = "radar-chart-v2.binds.info_4"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_1"
+                             DisplayName           = "radar-chart-v2.binds.info_1"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_7"
+                             DisplayName           = "radar-chart-v2.binds.info_7"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-v2.binds.info_6"
+                             DisplayName           = "radar-chart-v2.binds.info_6"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_6"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_6"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_8"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_8"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_4"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_4"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_9"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_9"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_5"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_5"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_7"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_7"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_1"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_1"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_5"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_5"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_10"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_10"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_4"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_4"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_9"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_9"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_2"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_2"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_2"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_2"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_1"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_1"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_3"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_3"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_3"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_3"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_10"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_10"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_8"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_8"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-yellow.binds.info_6"
+                             DisplayName           = "radar-chart-dark-yellow.binds.info_6"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+          <PropertyReference Name                  = "radar-chart-dark-blue.binds.info_7"
+                             DisplayName           = "radar-chart-dark-blue.binds.info_7"
+                             Description           = ""
+                             Visibility            = "Normal"
+                             Optional              = "0"
+                             ReadOnly              = "0"
+                             Static                = "0"
+                             RTWriteable           = "0"
+                             Scope                 = "Sys"
+                             Copy                  = "1"
+                             Nullable              = "1"
+                             ObjectFilter          = ""
+                             >
+              <Type Configurable = "No" Value = "system.pt.Simple"/>
+              <Unit Configurable = "No" Value = "0x10001"/>
+              <InitReference/>
+          </PropertyReference>
+        </PropertyGroup>
+      </PropertyTab>
+
+
+    </ObjectType>
+
+  </Types>
+<ExportedObjects>
+  <OI NAME="grafico-multi-pontos" TYPE="udt.43qjkze7ienu5clzpdyi2k4mha.kzpiatx7nbgpzlc67bhcvwriq2fbcykh"/>
+</ExportedObjects>
+
+</ObjectSet>
